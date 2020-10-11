@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.wesley.cursomc_cursomc_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.wesley.cursomc.domain.Categoria_1</class>
+    <class>com.wesley.cursomc.domain.Cliente_1</class>
+    <class>com.wesley.cursomc.domain.Pedido_1</class>
+    <class>com.pe.delivery.domain.Cliente</class>
+    <class>com.pe.delivery.domain.TipoVehiculo</class>
+    <class>com.pe.delivery.domain.Entrega</class>
+    <class>com.pe.delivery.domain.TipoDocumento</class>
+    <class>com.pe.delivery.domain.Distrito</class>
+    <class>com.pe.delivery.domain.EstadoDocVenta</class>
+    <class>com.pe.delivery.domain.DetalleDocVenta</class>
+    <class>com.pe.delivery.domain.Vehiculo</class>
+    <class>com.pe.delivery.domain.DocumentoVenta</class>
+    <class>com.pe.delivery.domain.Categoria</class>
+    <class>com.pe.delivery.domain.ProductoCategoria</class>
+    <class>com.pe.delivery.domain.PersonalEntrega</class>
+    <class>com.pe.delivery.domain.Pedido</class>
+    <class>com.pe.delivery.domain.EstadoPersonalEntrega</class>
+    <class>com.pe.delivery.domain.DetallePedido</class>
+    <class>com.pe.delivery.domain.Producto</class>
+    <class>com.pe.delivery.domain.EstadoPedido</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bd_delivery?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;serverTimezone=UTC "/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+    </properties>
+  </persistence-unit>
+</persistence>

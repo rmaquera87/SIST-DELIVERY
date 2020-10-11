@@ -1,0 +1,56 @@
+.productsContainer {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding-top: 5%;
+}
+
+.productsContainer .listProducts{
+    width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 60px;
+    margin: auto;
+    padding: 20px;
+}
+/* apenas para aprendizado: diminuindo tamanho do componente com > */
+.productsContainer .listProducts > div > div{
+    /*max-height: 50px;*/
+}
+
+.productsContainer .listProducts > div > div > p{
+    margin-top: 10px;
+}
+
+.productsContainer .listProducts > div > img{
+    /*width: 50px;
+    height: 50px;*/
+    width: 80px;
+    height: 80px;
+}
+
+
+
+@media(max-width:600px){
+    .productsContainer .listProducts{
+        width: 100%;
+        padding-top: 5%;
+        display: block;
+        margin-left: 0px;
+        padding: 0px;
+    }
+    /*  apenas para aprendizado: voltando ao original */
+    .productsContainer .listProducts > div > div{
+        max-height: 100px;
+    }
+
+    .productsContainer .listProducts > div > div > p{
+        margin-top: 30px;
+    }
+
+    .productsContainer .listProducts > div > img{
+        width: 80px;
+        height: 80px;
+    }
+
+}

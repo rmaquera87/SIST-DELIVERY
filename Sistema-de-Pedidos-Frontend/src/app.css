@@ -1,0 +1,13 @@
+*{
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+body{
+    background: #f0f0f5;
+}
+
+button, input{
+    outline: none;
+}
