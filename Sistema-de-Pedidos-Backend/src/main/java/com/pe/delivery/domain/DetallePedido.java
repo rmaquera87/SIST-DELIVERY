@@ -5,6 +5,7 @@
  */
 package com.pe.delivery.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -30,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "DetallePedido.findAll", query = "SELECT d FROM DetallePedido d"),
     @NamedQuery(name = "DetallePedido.findByIdDetallePedido", query = "SELECT d FROM DetallePedido d WHERE d.idDetallePedido = :idDetallePedido"),
     @NamedQuery(name = "DetallePedido.findByCantidad", query = "SELECT d FROM DetallePedido d WHERE d.cantidad = :cantidad"),
+    @NamedQuery(name = "DetallePedido.findByPrecioUnitario", query = "SELECT d FROM DetallePedido d WHERE d.precioUnitario = :precioUnitario"),
     @NamedQuery(name = "DetallePedido.findBySubTotal", query = "SELECT d FROM DetallePedido d WHERE d.subTotal = :subTotal")})
 public class DetallePedido implements Serializable {
 
@@ -41,14 +43,18 @@ public class DetallePedido implements Serializable {
     private Integer idDetallePedido;
     @Column(name = "cantidad")
     private Integer cantidad;
+    @Column(name = "precio_unitario")
+    private Long precioUnitario;
     @Column(name = "sub_total")
     private Long subTotal;
+    @JsonIgnore
     @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
     @ManyToOne(optional = false)
-    private Pedido idPedido;
+    private Pedido pedido;
+    @JsonIgnore
     @JoinColumn(name = "id_producto", referencedColumnName = "id_producto")
     @ManyToOne(optional = false)
-    private Producto idProducto;
+    private Producto producto;
 
     public DetallePedido() {
     }
@@ -73,6 +79,14 @@ public class DetallePedido implements Serializable {
         this.cantidad = cantidad;
     }
 
+    public Long getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(Long precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+
     public Long getSubTotal() {
         return subTotal;
     }
@@ -81,20 +95,20 @@ public class DetallePedido implements Serializable {
         this.subTotal = subTotal;
     }
 
-    public Pedido getIdPedido() {
-        return idPedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setIdPedido(Pedido idPedido) {
-        this.idPedido = idPedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
-    public Producto getIdProducto() {
-        return idProducto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setIdProducto(Producto idProducto) {
-        this.idProducto = idProducto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     @Override
@@ -119,7 +133,7 @@ public class DetallePedido implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.DetallePedido[ idDetallePedido=" + idDetallePedido + " ]";
+        return "com.pe.delivery.domain.DetallePedido[ idDetallePedido=" + idDetallePedido + " ]";
     }
     
 }

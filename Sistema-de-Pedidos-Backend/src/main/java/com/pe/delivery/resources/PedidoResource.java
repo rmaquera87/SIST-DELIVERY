@@ -5,6 +5,7 @@ import java.net.URI;
 
 import javax.validation.Valid;
 import com.pe.delivery.domain.Pedido;
+import com.pe.delivery.dto.PedidoDTO;
 import com.pe.delivery.services.PedidoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +39,7 @@ public class PedidoResource {
 	}
 	@ApiOperation(value="Inserir pedido")
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody PedidoDTO obj) {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getIdPedido()).toUri();
@@ -53,4 +54,5 @@ public class PedidoResource {
 		Page<Pedido> list = service.findPage(page, linesPerPage, orderBy, direction);
 		return ResponseEntity.ok().body(list);
 	}
+
 }

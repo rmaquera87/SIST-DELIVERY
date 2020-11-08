@@ -4,7 +4,7 @@ const addToCart = (product) => {
 
     let flag = 0;
     let cart = getCart().map(item => {
-        if (item.id === product.id) {
+        if (item.idProducto === product.idProducto) {
             item.qtd++
             flag++// muda flag para saber que deve colocar um novo no array
         }
@@ -45,7 +45,7 @@ const getCart = () => {
 const getTotalCart = () => {
     let total = 0
     getCart().map(item => {
-        total = total + (item.preco * item.qtd)
+        total = total + (item.precio * item.qtd)
         return 0
     })
 

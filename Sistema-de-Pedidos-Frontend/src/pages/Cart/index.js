@@ -37,8 +37,8 @@ function Cart () {
                     {cartItens.map(item => (
                         <li key={item.id}>
                             <ItemCart
-                                name={item.nome}
-                                price={item.preco}
+                                name={item.nombre}
+                                price={item.precio}
                                 qtd={item.qtd}
                                 addClick={() => addItem(item)}
                                 removeItemClick={() => removeItem(item)}

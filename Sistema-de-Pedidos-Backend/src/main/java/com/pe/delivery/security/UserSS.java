@@ -21,15 +21,16 @@ public class UserSS implements UserDetails {
     public UserSS() {
     }
 
-    public UserSS(Integer id, String email, String senha, Integer idPerfil) {
+    public UserSS(Integer id, String email, String senha, Set<Perfil> perfis) {
+    //public UserSS(Integer id, String email, String senha, Integer idPerfil) {
         super();
         this.id = id;
         this.email = email;
         this.senha = senha;
         
         //Set<Perfil> perfis=null;
-        //this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescripcion())).collect(Collectors.toList());
-        
+        this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescripcion())).collect(Collectors.toList());
+        //this.authorities = new SimpleGrantedAuthority(x.getDescripcion()).collect(Collectors.toList());
     }
 
     public boolean hasRole( Perfil perfil){

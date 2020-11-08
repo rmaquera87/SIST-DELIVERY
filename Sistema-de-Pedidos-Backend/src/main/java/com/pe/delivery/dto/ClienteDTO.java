@@ -1,12 +1,15 @@
 package com.pe.delivery.dto;
 
 import com.pe.delivery.domain.Cliente;
+import com.pe.delivery.domain.Entrega;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
 public class ClienteDTO implements Serializable {
     private Integer idCliente;
@@ -16,6 +19,7 @@ public class ClienteDTO implements Serializable {
     private String clave;
     private Integer tipo;
     private String telefono;
+    private Collection<Entrega> lstEntregas;
 
     public ClienteDTO(Cliente cliente) {
          this.idCliente = cliente.getIdCliente();
@@ -25,6 +29,7 @@ public class ClienteDTO implements Serializable {
          this.clave = cliente.getClave();
          this.tipo = cliente.getTipo();
          this.telefono = cliente.getTelefono();
+         this.lstEntregas=cliente.getEntregaCollection();
     }
 
     
@@ -84,6 +89,16 @@ public class ClienteDTO implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public Collection<Entrega> getLstEntregas() {
+        return lstEntregas;
+    }
+
+    public void setLstEntregas(Collection<Entrega> lstEntregas) {
+        this.lstEntregas = lstEntregas;
+    }
+
+
     
     
 }

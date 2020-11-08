@@ -101,7 +101,7 @@ public class TipoDocumento implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.TipoDocumento[ idTipoDocumento=" + idTipoDocumento + " ]";
+        return "com.pe.delivery.domain.TipoDocumento[ idTipoDocumento=" + idTipoDocumento + " ]";
     }
     
 }

@@ -1,8 +1,8 @@
 package com.pe.delivery.domain.enums;
 
 public enum EstadoPagamento {
-	PENDENTE (1,"Pendente"),
-	QUITADO(2,"Quitado"),
+	PENDENTE (1,"Pendiente"),
+	QUITADO(2,"Colocado"),
 	CANCELADO(3,"Cancelado");
 	
 	private int cod;

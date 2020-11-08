@@ -5,6 +5,7 @@
  */
 package com.pe.delivery.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -48,6 +49,7 @@ public class Entrega implements Serializable {
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEntrega")
     private Collection<Pedido> pedidoCollection;
+    @JsonIgnore
     @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
     @ManyToOne(optional = false)
     private Cliente idCliente;
@@ -58,12 +60,7 @@ public class Entrega implements Serializable {
     public Entrega(Integer idEntrega) {
         this.idEntrega = idEntrega;
     }
-    public Entrega(Integer idEntrega,String descripcion,Cliente idCliente) {
-        this.idEntrega = idEntrega;
-        this.descripcion = descripcion;
-        this.idCliente = idCliente;
-    }
-    
+
     public Integer getIdEntrega() {
         return idEntrega;
     }
@@ -119,7 +116,7 @@ public class Entrega implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.Entrega[ idEntrega=" + idEntrega + " ]";
+        return "com.pe.delivery.domain.Entrega[ idEntrega=" + idEntrega + " ]";
     }
     
 }

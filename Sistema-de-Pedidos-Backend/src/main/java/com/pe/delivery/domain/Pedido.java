@@ -5,8 +5,10 @@
  */
 package com.pe.delivery.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,7 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,31 +40,37 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pedido.findByFechaCreacion", query = "SELECT p FROM Pedido p WHERE p.fechaCreacion = :fechaCreacion")})
 public class Pedido implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
+    private Collection<DetallePedido> detallePedidoCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_pedido")
     private Integer idPedido;
-    @Size(max = 100)
     @Column(name = "fecha_creacion")
-    private String fechaCreacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
-    private Collection<DetallePedido> detallePedidoCollection;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacion;
+    @JsonIgnore
     @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
     @ManyToOne(optional = false)
     private Cliente idCliente;
+    @JsonIgnore
     @JoinColumn(name = "id_distrito", referencedColumnName = "id_distrito")
     @ManyToOne(optional = false)
     private Distrito idDistrito;
+    @JsonIgnore
     @JoinColumn(name = "id_entrega", referencedColumnName = "id_entrega")
     @ManyToOne(optional = false)
     private Entrega idEntrega;
+    @JsonIgnore
     @JoinColumn(name = "id_estado_pedido", referencedColumnName = "id_estado_pedido")
     @ManyToOne(optional = false)
     private EstadoPedido idEstadoPedido;
+    @JsonIgnore
     @JoinColumn(name = "id_personal_entrega", referencedColumnName = "id_personal_entrega")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private PersonalEntrega idPersonalEntrega;
 
     public Pedido() {
@@ -79,21 +88,12 @@ public class Pedido implements Serializable {
         this.idPedido = idPedido;
     }
 
-    public String getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
-    }
-
-    @XmlTransient
-    public Collection<DetallePedido> getDetallePedidoCollection() {
-        return detallePedidoCollection;
-    }
-
-    public void setDetallePedidoCollection(Collection<DetallePedido> detallePedidoCollection) {
-        this.detallePedidoCollection = detallePedidoCollection;
     }
 
     public Cliente getIdCliente() {
@@ -158,7 +158,16 @@ public class Pedido implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.Pedido[ idPedido=" + idPedido + " ]";
+        return "com.pe.delivery.domain.Pedido[ idPedido=" + idPedido + " ]";
+    }
+
+    @XmlTransient
+    public Collection<DetallePedido> getDetallePedidoCollection() {
+        return detallePedidoCollection;
+    }
+
+    public void setDetallePedidoCollection(Collection<DetallePedido> detallePedidoCollection) {
+        this.detallePedidoCollection = detallePedidoCollection;
     }
     
 }

@@ -101,7 +101,7 @@ public class EstadoDocVenta implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.EstadoDocVenta[ idEstadoDocVenta=" + idEstadoDocVenta + " ]";
+        return "com.pe.delivery.domain.EstadoDocVenta[ idEstadoDocVenta=" + idEstadoDocVenta + " ]";
     }
     
 }

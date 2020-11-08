@@ -16,8 +16,9 @@ function ProductDetail () {
 
     useEffect(() => {
         api.get(`/produtos/${id}`).then(response => {
+
             setProduct(response.data)
-            //setProduct(response.data.content)
+
         })
     }, [id])
 
@@ -25,7 +26,7 @@ function ProductDetail () {
         cart.addToCart(product)
         history.push('/cart')
     }
-    console.log(product.idProducto);
+    console.log("producto:"+product.idProducto);
     return (
         <HeaderNavigate name={"Detalles"} navigate={() => history.goBack()}>
             <LittleCart click={() => history.push('/cart')} />
@@ -34,7 +35,7 @@ function ProductDetail () {
                     <img src={"https://blog.hotmart.com/blog/2019/12/17163328/cadastrar_produto-670x419.png"} alt={"Foto do produto"} />
                     <div className="information">
                         
-                        <p>nom{product.idProducto}</p>
+                        <p>{product.nombre}</p>
                         <p>S/. {product.precio}.00</p>
                         <button onClick={addToCarHandle}>Adicionar Al Carrito</button>
                     </div>

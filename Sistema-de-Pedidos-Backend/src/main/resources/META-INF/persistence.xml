@@ -22,6 +22,7 @@
     <class>com.pe.delivery.domain.DetallePedido</class>
     <class>com.pe.delivery.domain.Producto</class>
     <class>com.pe.delivery.domain.EstadoPedido</class>
+    <class>com.pe.delivery.domain.Perfis</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bd_delivery?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;serverTimezone=UTC "/>
       <property name="javax.persistence.jdbc.user" value="root"/>

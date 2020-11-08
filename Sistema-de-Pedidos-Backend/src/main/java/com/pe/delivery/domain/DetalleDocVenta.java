@@ -119,7 +119,7 @@ public class DetalleDocVenta implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.DetalleDocVenta[ idDetalleDocVenta=" + idDetalleDocVenta + " ]";
+        return "com.pe.delivery.domain.DetalleDocVenta[ idDetalleDocVenta=" + idDetalleDocVenta + " ]";
     }
     
 }

@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio")})
 public class Producto implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private Collection<DetallePedido> detallePedidoCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,10 +52,6 @@ public class Producto implements Serializable {
     private Long precio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
     private Collection<ProductoCategoria> productoCategoriaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
-    private Collection<DetallePedido> detallePedidoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
-    private Collection<DetalleDocVenta> detalleDocVentaCollection;
 
     public Producto() {
     }
@@ -94,24 +93,6 @@ public class Producto implements Serializable {
         this.productoCategoriaCollection = productoCategoriaCollection;
     }
 
-    @XmlTransient
-    public Collection<DetallePedido> getDetallePedidoCollection() {
-        return detallePedidoCollection;
-    }
-
-    public void setDetallePedidoCollection(Collection<DetallePedido> detallePedidoCollection) {
-        this.detallePedidoCollection = detallePedidoCollection;
-    }
-
-    @XmlTransient
-    public Collection<DetalleDocVenta> getDetalleDocVentaCollection() {
-        return detalleDocVentaCollection;
-    }
-
-    public void setDetalleDocVentaCollection(Collection<DetalleDocVenta> detalleDocVentaCollection) {
-        this.detalleDocVentaCollection = detalleDocVentaCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -134,7 +115,16 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.Producto[ idProducto=" + idProducto + " ]";
+        return "com.pe.delivery.domain.Producto[ idProducto=" + idProducto + " ]";
+    }
+
+    @XmlTransient
+    public Collection<DetallePedido> getDetallePedidoCollection() {
+        return detallePedidoCollection;
+    }
+
+    public void setDetallePedidoCollection(Collection<DetallePedido> detallePedidoCollection) {
+        this.detallePedidoCollection = detallePedidoCollection;
     }
     
 }

@@ -16,10 +16,10 @@ function FormPayment () {
     }
 
     return (
-        <HeaderNavigate name={'Forma de pagamento'} navigate={() => history.push('/get-adress')}>
+        <HeaderNavigate name={'Forma de pago'} navigate={() => history.push('/get-adress')}>
             <div className='containerPayment'>
                 <br />
-                <span>Tipo de pagamento</span>
+                <span>Tipo de pago</span>
                 <form onSubmit={handleFinish}>
                     <div className='selectPayment'>
                         <input
@@ -32,7 +32,7 @@ function FormPayment () {
                         />
                         <label
                             htmlFor='boleto'>
-                            Pagamento com boleto
+                            Pago en Efectivo
                         </label>
                         <input
                             id='cartao'
@@ -44,13 +44,13 @@ function FormPayment () {
                         />
                         <label
                             htmlFor='cartao'>
-                            Pagamento com cartão
+                            Pago con Tarjeta
                          </label>
                     </div>
                     <div className='numPlots'>
                         {plots === true ? (
                             <>
-                                <h3>Nº parcelas no cartão</h3>
+                                <h3>Nº de cuotas</h3>
                                 <select onChange={event => qtdPlots = event.target.value}>
                                     <option value='1'>1</option>
                                     <option value='2'>2</option>

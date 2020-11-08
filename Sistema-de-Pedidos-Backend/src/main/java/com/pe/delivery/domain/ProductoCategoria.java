@@ -97,7 +97,7 @@ public class ProductoCategoria implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.ProductoCategoria[ idProductoCategoria=" + idProductoCategoria + " ]";
+        return "com.pe.delivery.domain.ProductoCategoria[ idProductoCategoria=" + idProductoCategoria + " ]";
     }
     
 }

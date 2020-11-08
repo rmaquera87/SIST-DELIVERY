@@ -22,6 +22,9 @@ function SideDrawer (props) {
                         <a href="/cart">Carrito De Compras</a>
                     </li>
                     <li>
+                        <a href="/pedidos/historial">Historial de Pedidos</a>
+                    </li>
+                    <li>
                         <a href="/">Salir</a>
                     </li>
                 </ul>

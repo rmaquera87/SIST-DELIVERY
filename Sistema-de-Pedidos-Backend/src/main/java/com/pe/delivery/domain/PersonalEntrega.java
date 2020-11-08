@@ -8,14 +8,11 @@ package com.pe.delivery.domain;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -37,8 +34,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PersonalEntrega.findByNombres", query = "SELECT p FROM PersonalEntrega p WHERE p.nombres = :nombres"),
     @NamedQuery(name = "PersonalEntrega.findByApellidoPaterno", query = "SELECT p FROM PersonalEntrega p WHERE p.apellidoPaterno = :apellidoPaterno"),
     @NamedQuery(name = "PersonalEntrega.findByApellidoMaterno", query = "SELECT p FROM PersonalEntrega p WHERE p.apellidoMaterno = :apellidoMaterno"),
-    @NamedQuery(name = "PersonalEntrega.findByNroDni", query = "SELECT p FROM PersonalEntrega p WHERE p.nroDni = :nroDni")})
+    @NamedQuery(name = "PersonalEntrega.findByNroDni", query = "SELECT p FROM PersonalEntrega p WHERE p.nroDni = :nroDni"),
+    @NamedQuery(name = "PersonalEntrega.findByEstado", query = "SELECT p FROM PersonalEntrega p WHERE p.estado = :estado")})
 public class PersonalEntrega implements Serializable {
+
+    @OneToMany(mappedBy = "idPersonalEntrega")
+    private Collection<Pedido> pedidoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,13 +59,9 @@ public class PersonalEntrega implements Serializable {
     @Size(max = 8)
     @Column(name = "nro_dni")
     private String nroDni;
-    @JoinColumn(name = "id_estado_personal_entrega", referencedColumnName = "id_estado_personal_entrega")
-    @ManyToOne(optional = false)
-    private EstadoPersonalEntrega idEstadoPersonalEntrega;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonalEntrega")
-    private Collection<Vehiculo> vehiculoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonalEntrega")
-    private Collection<Pedido> pedidoCollection;
+    @Size(max = 1)
+    @Column(name = "estado")
+    private String estado;
 
     public PersonalEntrega() {
     }
@@ -113,30 +110,12 @@ public class PersonalEntrega implements Serializable {
         this.nroDni = nroDni;
     }
 
-    public EstadoPersonalEntrega getIdEstadoPersonalEntrega() {
-        return idEstadoPersonalEntrega;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setIdEstadoPersonalEntrega(EstadoPersonalEntrega idEstadoPersonalEntrega) {
-        this.idEstadoPersonalEntrega = idEstadoPersonalEntrega;
-    }
-
-    @XmlTransient
-    public Collection<Vehiculo> getVehiculoCollection() {
-        return vehiculoCollection;
-    }
-
-    public void setVehiculoCollection(Collection<Vehiculo> vehiculoCollection) {
-        this.vehiculoCollection = vehiculoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Pedido> getPedidoCollection() {
-        return pedidoCollection;
-    }
-
-    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
-        this.pedidoCollection = pedidoCollection;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override
@@ -161,7 +140,16 @@ public class PersonalEntrega implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.PersonalEntrega[ idPersonalEntrega=" + idPersonalEntrega + " ]";
+        return "com.pe.delivery.domain.PersonalEntrega[ idPersonalEntrega=" + idPersonalEntrega + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Pedido> getPedidoCollection() {
+        return pedidoCollection;
+    }
+
+    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
+        this.pedidoCollection = pedidoCollection;
     }
     
 }

@@ -30,7 +30,9 @@ import java.util.List;
 public class ClienteService {
 	@Autowired
 	private ClienteRepository repo;
-
+        
+	@Autowired
+	private EntregaRepository entregaRepo;
 
 
 
@@ -53,18 +55,25 @@ public class ClienteService {
 		return obj;
 	}
 
-	public Cliente findByEmail(String email) {
+	public ClienteDTO findByEmail(String email) {
 		UserSS user = UserService.authenticated();
 		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
 			throw new AuthorizationException("Acesso Denegado");
 		}
 
 		Cliente obj = repo.findByEmail(email);
+                
 		if (obj == null) {
 			throw new ObjectNotFoundException(
 					"¡Objeto no encontrado! Id: " + user.getId() + ", Tipo: " + Cliente.class.getName());
 		}
-		return obj;
+                
+                
+                //List<Entrega> lstEntrega = entregaRepo.findEntregaXCliente(obj.getIdCliente());
+                ClienteDTO clienteDTO=new ClienteDTO(obj);
+                //clienteDTO.setLstEntrega(lstEntrega);
+                
+		return clienteDTO;
 	}
 
 	public Cliente insert(Cliente obj) {
@@ -99,7 +108,12 @@ public class ClienteService {
 	}
 
 	public Cliente fromDTO(ClienteDTO objDto) {
-		return new Cliente(objDto.getIdCliente(), objDto.getNombreCompleto(), objDto.getEmail());
+		//return new Cliente(objDto.getIdCliente(), objDto.getNombreCompleto(), objDto.getEmail());
+                Cliente cliente=new Cliente();
+                        cliente.setIdCliente(objDto.getIdCliente()); 
+                        cliente.setNombreCompleto(objDto.getNombreCompleto());
+                        cliente.setEmail(objDto.getEmail());
+                return cliente;
 	}
 
 	private void updateData(Cliente newObj, Cliente obj) {

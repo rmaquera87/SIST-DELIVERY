@@ -6,9 +6,7 @@
 package com.pe.delivery.domain;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,18 +14,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author DAYIRO
  */
 @Entity
-@Table(name = "distrito")
+@Table(name = "distrito", catalog = "bd_delivery", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Distrito.findAll", query = "SELECT d FROM Distrito d"),
@@ -44,10 +40,6 @@ public class Distrito implements Serializable {
     @Size(max = 100)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDistrito")
-    private Collection<DocumentoVenta> documentoVentaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDistrito")
-    private Collection<Pedido> pedidoCollection;
 
     public Distrito() {
     }
@@ -72,24 +64,6 @@ public class Distrito implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public Collection<DocumentoVenta> getDocumentoVentaCollection() {
-        return documentoVentaCollection;
-    }
-
-    public void setDocumentoVentaCollection(Collection<DocumentoVenta> documentoVentaCollection) {
-        this.documentoVentaCollection = documentoVentaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Pedido> getPedidoCollection() {
-        return pedidoCollection;
-    }
-
-    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
-        this.pedidoCollection = pedidoCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -112,7 +86,7 @@ public class Distrito implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.Distrito[ idDistrito=" + idDistrito + " ]";
+        return "com.pe.delivery.domain.Distrito[ idDistrito=" + idDistrito + " ]";
     }
     
 }

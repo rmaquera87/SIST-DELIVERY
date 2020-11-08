@@ -101,7 +101,7 @@ public class EstadoPedido implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.EstadoPedido[ idEstadoPedido=" + idEstadoPedido + " ]";
+        return "com.pe.delivery.domain.EstadoPedido[ idEstadoPedido=" + idEstadoPedido + " ]";
     }
     
 }

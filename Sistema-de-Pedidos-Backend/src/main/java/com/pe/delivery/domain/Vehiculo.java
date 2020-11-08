@@ -134,7 +134,7 @@ public class Vehiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.Vehiculo[ idVehiculo=" + idVehiculo + " ]";
+        return "com.pe.delivery.domain.Vehiculo[ idVehiculo=" + idVehiculo + " ]";
     }
     
 }

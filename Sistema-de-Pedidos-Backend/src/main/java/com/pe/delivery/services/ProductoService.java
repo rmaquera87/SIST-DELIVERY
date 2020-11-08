@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pe.delivery.domain.Categoria;
 import com.pe.delivery.domain.Producto;
+import com.pe.delivery.dto.ProductoDTO;
 
 import com.pe.delivery.repositories.CategoriaRepository;
 import com.pe.delivery.repositories.ProductoRepository;
@@ -24,13 +25,23 @@ public class ProductoService  {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public Producto find(Integer id) {
-        Producto obj = repo.findOne(id);
+    public ProductoDTO find(Integer id) {
+        //Producto obj = repo.findOne(id);
+        Producto obj = repo.findByIdProducto(id);
+
+        /*Producto obj=new Producto();
+        obj.setIdProducto(1);
+        obj.setNombre("pro");
+        obj.setPrecio(Long.parseLong("13"));*/
         if (obj == null) {
             throw new ObjectNotFoundException("¡Objeto no encontrado! Id: " + id
                     + ", Tipo: " + Producto.class.getName());
         }
-        return obj;
+        
+        ProductoDTO productoDto=new ProductoDTO(obj);
+        
+        
+        return productoDto;
     }
 
     public Page<Producto> search(String nome, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {

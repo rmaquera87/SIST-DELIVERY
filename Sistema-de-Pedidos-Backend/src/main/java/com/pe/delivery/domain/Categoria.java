@@ -53,10 +53,6 @@ public class Categoria implements Serializable {
     public Categoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
-    public Categoria(Integer idCategoria,String descripcion) {
-        this.idCategoria = idCategoria;
-        this.descripcion = descripcion;
-    }
 
     public Integer getIdCategoria() {
         return idCategoria;
@@ -105,7 +101,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.Categoria[ idCategoria=" + idCategoria + " ]";
+        return "com.pe.delivery.domain.Categoria[ idCategoria=" + idCategoria + " ]";
     }
     
 }

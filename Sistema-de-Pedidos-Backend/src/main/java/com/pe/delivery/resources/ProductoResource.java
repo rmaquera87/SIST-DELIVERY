@@ -29,8 +29,8 @@ public class ProductoResource {
 
     @ApiOperation(value="Buscar produto por ID")
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public ResponseEntity<Producto> find(@PathVariable Integer id) {
-        Producto obj = service.find(id);
+    public ResponseEntity<ProductoDTO> find(@PathVariable Integer id) {
+        ProductoDTO obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
 

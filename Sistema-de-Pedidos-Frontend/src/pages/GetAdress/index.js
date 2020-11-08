@@ -23,12 +23,12 @@ function GetAdress () {
             }
         }).then(response => {
             console.log(response)
-            setAdresses(response.data.enderecos)
+            setAdresses(response.data.lstEntregas)
             request.setClient(response.data)
         }).catch(error => {
             responseError(error)
             history.push('/')
-            alert('Sua sessão expirou.')
+            alert('Su sesion a expirado')
         })
     }, [history])
 
@@ -38,17 +38,15 @@ function GetAdress () {
     }
 
     return (
-        <HeaderNavigate name={'Fechamento de pedido'} navigate={() => history.push('/cart')}>
+        <HeaderNavigate name={'Finalizar Pedido'} navigate={() => history.push('/cart')}>
             <div className='containerAdress'>
                 <br />
                 <hr />
-                <span>Selecione um endereço</span>
+                <span>Selecione una dirección de entrega</span>
                 <ul>
                     {adresses.map(adress => (
-                        <li onClick={() => handleFormPayment(adress)} key={adress.id}>
-                            <p>{`${adress.logadouro}, ${adress.numero}`}</p>
-                            <p>{`${adress.complemento}, CEP ${adress.cep}`}</p>
-                            <p>{`${adress.bairro}, ${adress.cidade.estado.nome}`}</p>
+                        <li onClick={() => handleFormPayment(adress)} key={adress.idEntrega}>
+                            <p>{`${adress.descripcion}`}</p>
                         </li>
                     ))}
                 </ul>

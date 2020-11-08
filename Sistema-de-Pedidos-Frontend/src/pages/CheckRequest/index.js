@@ -14,21 +14,28 @@ function CheckRequest () {
     const { qtdPlots } = useParams()
 
     function handleRequest () {
-        const itens = cart.getCart().map(item => {
+        const items = cart.getCart().map(item => {
             return {
-                quantidade: item.qtd,
-                produto: { id: item.id }
+
+                cantidad: item.qtd,
+                precioUnitario: item.precio,
+                subTotal: item.precio * item.qtd,
+                idProducto: item.idProducto
+
             }
         })
 
         const data = {
-            cliente: { id: request.getClient().id },
-            enderecoDeEntrega: request.getAdressDelivery(),
+            idCliente:  request.getClient().idCliente ,
+            idEntrega:  request.getAdressDelivery().idEntrega,
+            detallePedido: items
+
+            /*enderecoDeEntrega: request.getAdressDelivery(),
             pagamento: {
                 numeroDeParcelas: parseInt(qtdPlots),
                 '@type': qtdPlots === '0' ? 'pagamentoComBoleto' : 'pagamentoComCartao'
             },
-            itens
+            itens*/
         }
 
         const token = localStorage.getItem('token')
@@ -39,6 +46,14 @@ function CheckRequest () {
             }
         }).then(response => {
             console.log(response)
+
+            if(response.status===200 || response.status===201){
+                history.push('/categories')
+                alert("Su pedido se ha registrado correctamente");
+                localStorage.removeItem('cart');
+            }else{
+                alert("Hubo un error");
+            }
         }).catch(error => {
             responseError(error)
         })
@@ -47,10 +62,32 @@ function CheckRequest () {
     }
 
     return (
-        <Home name={'Confira seu pedido'}>
+        <Home name={'Confirmar Pedido'}>
             <div className='checkContainer'>
+
                 <section>
-                    <h1>Itens do pedido</h1>
+                    <h1>Cliente</h1>
+                    <p>{request.getClient().nombreCompleto}</p>
+                    <p>{request.getClient().email}</p>
+
+                    <h1>Dirección de Entrega</h1>
+                    <p>{`${request.getAdressDelivery().descripcion}`}</p>
+
+
+                    <h1>Pago</h1>
+                    {qtdPlots === '0' ?
+                        <p>Pago con Efectivo</p>
+                        :
+                        (
+                            <>
+                                <p>Pago con Tarjeta</p>
+                                <p>{`${qtdPlots} parcelas`}</p>
+                            </>
+                        )
+                    }
+                </section>
+                <section>
+                    <h1>Items del pedido</h1>
                     <ul>
                         {cart.getCart().map(item => (
                             <li key={item.id}>
@@ -58,43 +95,20 @@ function CheckRequest () {
                                     src={'https://comps.canstockphoto.com.br/produto-engrenagem-s%C3%ADmbolo-cardbox-desenho_csp53091492.jpg'}
                                     alt={'item do carrinho'}
                                 />
-                                <div className='infoItem'>
-                                    <p>{item.nome}</p>
-                                    <p>{`$${item.preco}`}</p>
-                                    <p>{item.qtd}</p>
+                                <div className='infoItem' align="left">
+                                    <p align="left"><b>{item.nombre}</b></p>
+                                    <p align="left"><b>Cant.:</b> {item.qtd} <b>P.U.:</b> {`S/ ${item.precio}`}</p>
+                                  
                                 </div>
-                                <div className='price'>{`$${item.preco * item.qtd}`}</div>
+                                <div className='price'><b>Total</b> {`S/ ${item.precio * item.qtd}`}</div>
                             </li>
                         ))}
                     </ul>
-                    <h1>Total: {`$${cart.getTotalCart()}`}</h1>
+                    <h1 align="right">Total: {`S/ ${cart.getTotalCart()}`}</h1>
                 </section>
-                <section>
-                    <h1>Cliente</h1>
-                    <p>{request.getClient().nome}</p>
-                    <p>{request.getClient().email}</p>
-
-                    <h1>Endereço de entrega</h1>
-                    <p>{`${request.getAdressDelivery().logadouro}, ${request.getAdressDelivery().numero}`}</p>
-                    <p>{`${request.getAdressDelivery().complemento} CEP ${request.getAdressDelivery().cep}`}</p>
-                    <p>{`${request.getAdressDelivery().bairro}, ${request.getAdressDelivery().cidade.estado.nome}`}</p>
-
-                    <h1>Pagamento</h1>
-                    {qtdPlots === '0' ?
-                        <p>Pagamento com boleto</p>
-                        :
-                        (
-                            <>
-                                <p>Pagamento com cartão</p>
-                                <p>{`${qtdPlots} parcelas`}</p>
-                            </>
-                        )
-                    }
-                </section>
-
                 <div className='buttons'>
                     <button onClick={() => handleRequest()}>Confirmar pedido</button>
-                    <button onClick={() => history.goBack()}>voltar</button>
+                    <button onClick={() => history.goBack()}>Regresar</button>
                 </div>
             </div>
         </Home>

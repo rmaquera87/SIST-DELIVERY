@@ -1,19 +1,16 @@
 package com.pe.delivery.repositories;
 
-/*package com.wesley.cursomc.repositories;
-
+import com.pe.delivery.domain.EstadoPedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.wesley.cursomc.domain.Estado;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-public interface EstadoRepository extends JpaRepository<Estado, Integer> {
+public interface EstadoPedidoRepository extends JpaRepository<EstadoPedido, Integer> {
 
-    @Transactional(readOnly=true)
-    public List<Estado> findAllByOrderByNome();
+    
 }
-*/

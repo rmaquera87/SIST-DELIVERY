@@ -5,19 +5,13 @@
  */
 package com.pe.delivery.domain;
 
-import com.pe.delivery.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -73,29 +67,22 @@ public class Cliente implements Serializable {
     private String telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private Collection<DocumentoVenta> documentoVentaCollection;
+    @JsonIgnore
+    @OneToMany(mappedBy = "idCliente")
+    private Collection<Perfis> perfisCollection;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private Collection<Pedido> pedidoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private Collection<Entrega> entregaCollection;
-/*
-    @ElementCollection(fetch=FetchType.EAGER)
-    @CollectionTable(name="PERFIS")
-    private Set<Integer> perfis = new HashSet<>();
-    */
+
     public Cliente() {
-        //addPerfil(Perfil.CLIENTE);
     }
 
     public Cliente(Integer idCliente) {
         this.idCliente = idCliente;
-        //addPerfil(Perfil.CLIENTE);
     }
-    public Cliente(Integer idCliente,String nombreCompleto,String email) {
-        this.idCliente = idCliente;
-        this.nombreCompleto = nombreCompleto;
-        this.email = email;
-        //addPerfil(Perfil.CLIENTE);
-    }
+
     public Integer getIdCliente() {
         return idCliente;
     }
@@ -143,8 +130,6 @@ public class Cliente implements Serializable {
     public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
-    
-
 
     public String getTelefono() {
         return telefono;
@@ -153,15 +138,7 @@ public class Cliente implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    /*
-    public Set<Perfil> getPerfis() {
-        return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
-    }
 
-    public void addPerfil(Perfil perfil) {
-        perfis.add(perfil.getCod());
-    }*/
-    
     @XmlTransient
     public Collection<DocumentoVenta> getDocumentoVentaCollection() {
         return documentoVentaCollection;
@@ -169,6 +146,15 @@ public class Cliente implements Serializable {
 
     public void setDocumentoVentaCollection(Collection<DocumentoVenta> documentoVentaCollection) {
         this.documentoVentaCollection = documentoVentaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Perfis> getPerfisCollection() {
+        return perfisCollection;
+    }
+
+    public void setPerfisCollection(Collection<Perfis> perfisCollection) {
+        this.perfisCollection = perfisCollection;
     }
 
     @XmlTransient
@@ -211,7 +197,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.Cliente[ idCliente=" + idCliente + " ]";
+        return "com.pe.delivery.domain.Cliente[ idCliente=" + idCliente + " ]";
     }
     
 }

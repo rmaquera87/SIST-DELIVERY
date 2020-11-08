@@ -158,7 +158,7 @@ public class DocumentoVenta implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wesley.cursomc.domain.DocumentoVenta[ idDocumentoVenta=" + idDocumentoVenta + " ]";
+        return "com.pe.delivery.domain.DocumentoVenta[ idDocumentoVenta=" + idDocumentoVenta + " ]";
     }
     
 }

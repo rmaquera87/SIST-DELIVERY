@@ -17,4 +17,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     @Transactional(readOnly=true)
     @Query("SELECT DISTINCT p FROM ProductoCategoria pc INNER JOIN pc.idProducto p INNER JOIN pc.idCategoria c WHERE p.nombre LIKE %:nombre% AND c IN :categorias")
     Page<Producto> findDistinctByNombreContainingAndCategoriasIn(@Param("nombre") String nomex, @Param("categorias") List<Categoria> categorias, Pageable pageRequest);
+    
+    Producto findByIdProducto(Integer idProducto);
 }
